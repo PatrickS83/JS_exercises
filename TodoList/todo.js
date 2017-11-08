@@ -1,24 +1,22 @@
-var todos = ['todo1', 'todo2', 'todo3'];
-
-// Function to display ToDo Items
-function displayTodos() {
-  console.log('Things to do:', todos);
-}
-
-//Function to add ToDo Items
-function addTodo(todo) {
-  todos.push(todo);
-  displayTodos();
-}
-
-//Function to change ToDo Items
-function changeTodo(position, newValue) {
-  todos[position] = newValue;
-  displayTodos();
-}
-
-//Function to delete ToDo Items
-function deleteTodo(position) {
-  todos.splice(position, 1);
-  displayTodos();
-}
+var todoList = {
+  todos: ['todo 1', 'todo 2', 'todo 3'],
+  // Function to display ToDo Items
+  displayTodos: function() {
+    console.log('Stuff to do', this.todos);
+  },
+  //Function to add ToDo Items
+  addTodo: function(todo) {
+    this.todos.push(todo);
+    this.displayTodos();
+  },
+  //Function to change ToDo Items
+  changeTodo: function(position, newValue) {
+    this.todos(position) = newValue;
+    this.displayTodos();
+  },
+  //Function to delete ToDo Items
+  deleteTodo: function(position) {
+    this.todos.splice(position, 1);
+    this.displayTodos();
+  }
+};
