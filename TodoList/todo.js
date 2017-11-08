@@ -1,8 +1,21 @@
 var todoList = {
   todos: [],
-  // Function to display ToDo Items
+  // Function to display ToDo Items Text and completed status
   displayTodos: function() {
-    console.log('Stuff to do', this.todos);
+    if (this.todos.length === 0) {
+      console.log('Your todo list is empty :/');
+    }
+    else {
+      console.log('Stuff to do:');
+      for (let i = 0; i < this.todos.length; i++) {
+        if (this.todos[i].completed === true) {
+          console.log('(x)', this.todos[i].todoText);
+        }
+        else {
+          console.log('()', this.todos[i].todoText);
+        }
+      }
+    }
   },
   //Function to add ToDo Items as objects
   addTodo: function(todoText) {
