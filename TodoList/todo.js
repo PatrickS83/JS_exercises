@@ -67,9 +67,13 @@ var todoList = {
   }
 };
 
-//Store Displays ToDo button in variable
 let displayButton = document.querySelector('.btn__display');
+let toggleAllButton = document.querySelector('.btn__toggleall');
 // Display ToDos on Buttonclick
 displayButton.addEventListener('click', function() {
   todoList.displayTodos();
+})
+//ToggleAll on Buttonclick
+toggleAllButton.addEventListener('click', function() {
+  todoList.toggleAll();
 })
