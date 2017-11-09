@@ -66,3 +66,10 @@ var todoList = {
     this.displayTodos();
   }
 };
+
+//Store Displays ToDo button in variable
+let displayButton = document.querySelector('.btn__display');
+// Display ToDos on Buttonclick
+displayButton.addEventListener('click', function() {
+  todoList.displayTodos();
+})
