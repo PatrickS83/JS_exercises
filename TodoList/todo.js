@@ -40,5 +40,29 @@ var todoList = {
     let todo = this.todos[position];
     todo.completed = !todo.completed;
     this.displayTodos();
+  },
+  //Function to toggle completed status of ALL items
+  toggleAll: function() {
+    let totalTodos = this.todos.length;
+    let completedTodos = 0;
+    // Check and store if there are completed Items
+    for (let i = 0; i < totalTodos; i++) {
+      if (this.todos[i].completed === true) {
+        completedTodos++;
+      }
+    }
+    // Toggle all to false if everything is true
+    if (completedTodos === totalTodos) {
+      for (let i = 0; i < totalTodos; i++) {
+        this.todos[i].completed = false;
+      }
+    }
+    // Otherwiske make everything true
+    else {
+      for (let i = 0; i < totalTodos; i++) {
+        this.todos[i].completed = true;
+      }
+    }
+    this.displayTodos();
   }
 };
