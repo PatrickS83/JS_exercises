@@ -76,6 +76,11 @@ let handlers = {
   //ToggleAll completed on Buttonclick
   toggleAll: function() {
     todoList.toggleAll();
+  },
+  addTodo: function() {
+    let addTodoInput = document.getElementById('addTodoInput');
+    todoList.addTodo(addTodoInput.value);
+    addTodoInput.value = "";
   }
 
 }
