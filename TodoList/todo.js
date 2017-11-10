@@ -83,13 +83,19 @@ let handlers = {
     todoList.addTodo(addTodoInput.value);
     addTodoInput.value = "";
   },
-  //Changes ToDo item at a specified position and clears textfields
+  //Changes ToDo item at user specified position and clears inputfields
   changeTodo: function() {
     let changeTodoPosition = document.getElementById('changeTodoPosition');
     let changeTodoText = document.getElementById('changeTodoText');
     todoList.changeTodo(changeTodoPosition.valueAsNumber, changeTodoText.value);
     changeTodoPosition.value = "";
     changeTodoText.value = "";
+  },
+  //Delte ToDo Item at user specified location and clear inputfield
+  deleteTodo: function() {
+    let deleteTodoPosition = document.getElementById('deleteTodoPosition');
+    todoList.deleteTodo(deleteTodoPosition.valueAsNumber);
+    deleteTodoPosition.value = "";
   }
 
 }
