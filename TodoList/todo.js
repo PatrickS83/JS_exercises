@@ -73,10 +73,6 @@ let handlers = {
   displayTodos: function() {
     todoList.displayTodos();
   },
-  //ToggleAll completed on Buttonclick
-  toggleAll: function() {
-    todoList.toggleAll();
-  },
   //Add textfield value to todo list and clear textfield
   addTodo: function() {
     let addTodoInput = document.getElementById('addTodoInput');
@@ -91,11 +87,21 @@ let handlers = {
     changeTodoPosition.value = "";
     changeTodoText.value = "";
   },
-  //Delte ToDo Item at user specified location and clear inputfield
+  //Delete ToDo Item at user specified location and clear inputfield
   deleteTodo: function() {
     let deleteTodoPosition = document.getElementById('deleteTodoPosition');
     todoList.deleteTodo(deleteTodoPosition.valueAsNumber);
     deleteTodoPosition.value = "";
+  },
+  //Delete ToDo Item at user specified location and clear inputfield
+  toggleCompleted : function() {
+    let toggleCompletedPosition = document.getElementById('toggleCompletedPosition');
+    todoList.toggleCompleted(toggleCompletedPosition.valueAsNumber);
+    toggleCompletedPosition.value = "";
+  },
+  //ToggleAll completed on Buttonclick
+  toggleAll: function() {
+    todoList.toggleAll();
   }
 
 }
