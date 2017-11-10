@@ -77,10 +77,19 @@ let handlers = {
   toggleAll: function() {
     todoList.toggleAll();
   },
+  //Add textfield value to todo list and clear textfield
   addTodo: function() {
     let addTodoInput = document.getElementById('addTodoInput');
     todoList.addTodo(addTodoInput.value);
     addTodoInput.value = "";
+  },
+  //Changes ToDo item at a specified position and clears textfields
+  changeTodo: function() {
+    let changeTodoPosition = document.getElementById('changeTodoPosition');
+    let changeTodoText = document.getElementById('changeTodoText');
+    todoList.changeTodo(changeTodoPosition.valueAsNumber, changeTodoText.value);
+    changeTodoPosition.value = "";
+    changeTodoText.value = "";
   }
 
 }
