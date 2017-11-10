@@ -67,13 +67,15 @@ var todoList = {
   }
 };
 
-let displayButton = document.querySelector('.btn__display');
-let toggleAllButton = document.querySelector('.btn__toggleall');
-// Display ToDos on Buttonclick
-displayButton.addEventListener('click', function() {
-  todoList.displayTodos();
-})
-//ToggleAll on Buttonclick
-toggleAllButton.addEventListener('click', function() {
-  todoList.toggleAll();
-})
+// Object for button onclick events
+let handlers = {
+  // Display ToDos on Buttonclick
+  displayTodos: function() {
+    todoList.displayTodos();
+  },
+  //ToggleAll completed on Buttonclick
+  toggleAll: function() {
+    todoList.toggleAll();
+  }
+
+}
