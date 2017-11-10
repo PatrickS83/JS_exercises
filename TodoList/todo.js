@@ -25,23 +25,21 @@ var todoList = {
     let totalTodos = this.todos.length;
     let completedTodos = 0;
     // Check and store if there are completed Items
-    for (let i = 0; i < totalTodos; i++) {
-      if (this.todos[i].completed === true) {
+    this.todos.forEach(function(todo) {
+      if (todo.completed === true) {
         completedTodos++;
       }
-    }
-    // Toggle all to false if everything is true
-    if (completedTodos === totalTodos) {
-      for (let i = 0; i < totalTodos; i++) {
-        this.todos[i].completed = false;
+    });
+    this.todos.forEach(function(todo) {
+      // Toggle all to false if everything is true
+      if (completedTodos === totalTodos) {
+        todo.completed = false;
       }
-    }
-    // Otherwiske make everything true
-    else {
-      for (let i = 0; i < totalTodos; i++) {
-        this.todos[i].completed = true;
+      // Otherwiske make everything true
+      else {
+        todo.completed = true;
       }
-    }
+    });
   }
 };
 
@@ -89,21 +87,21 @@ let view = {
     let todoUl = document.querySelector('ul');
     todoUl.innerHTML = "";
     //Create an li-element for every todo item
-    for (let i = 0; i < todoList.todos.length; i++) {
+    todoList.todos.forEach(function(todo, position) {
       let todoTextWithCompletion = "";
       let todoLi = document.createElement('li');
 
-      if (todoList.todos[i].completed === true) {
-        todoTextWithCompletion = "(x) " + todoList.todos[i].todoText
+      if (todo.completed === true) {
+        todoTextWithCompletion = "(x) " + todo.todoText
       }
       else {
-        todoTextWithCompletion = "() " + todoList.todos[i].todoText
+        todoTextWithCompletion = "() " + todo.todoText
       }
-      todoLi.id = i;
+      todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
       todoUl.appendChild(todoLi);
-    }
+    }, this); // the 'this' is the second argument in forEach function and ensures that the 'this' correctly points at the object "view"
   },
   createDeleteButton: function() {
     let deleteButton = document.createElement("button");
