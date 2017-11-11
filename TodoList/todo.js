@@ -25,12 +25,13 @@ var todoList = {
     let totalTodos = this.todos.length;
     let completedTodos = 0;
     // Check and store if there are completed Items
-    this.todos.forEach(function(todo) {
+    for (let todo of this.todos) {
       if (todo.completed === true) {
         completedTodos++;
       }
-    });
-    this.todos.forEach(function(todo) {
+    };
+
+    for (let todo of this.todos) {
       // Toggle all to false if everything is true
       if (completedTodos === totalTodos) {
         todo.completed = false;
@@ -39,7 +40,7 @@ var todoList = {
       else {
         todo.completed = true;
       }
-    });
+    };
   }
 };
 
@@ -101,7 +102,7 @@ let view = {
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
       todoUl.appendChild(todoLi);
-    }, this); // the 'this' is the second argument in forEach function and ensures that the 'this' correctly points at the object "view"
+    }, this); // the 'this' is optional argument in forEach function and ensures that the 'this' correctly points at the object "view"
   },
   createDeleteButton: function() {
     let deleteButton = document.createElement("button");
