@@ -12,19 +12,20 @@ const party = {
     event.preventDefault();
     // Fetch all input values from form and put them into variables
     const inputs = document.querySelectorAll("input");
-    [first, last, email, item, plusOne, plusOneName] = inputs;
+    [first, last, eMail, item, plusOne, plusOneName] = inputs;
     // create guest object
     const guest = {
       firstName: first.value,
       lastName: last.value,
-      email: (email.value = "-".repeat(10)),
+      email: eMail.value,
       bringItem: item.value,
-      plusOne: (plusOneName.value = "-".repeat(10))
+      plusOne: plusOneName.value
     };
     // check for required values
     if (!!guest.firstName && !!guest.lastName && !!guest.bringItem) {
       // add guest to array if all required values are filled
       this.guests.push(guest);
+      this.storeGuests();
       ui.displayGuests();
     }
   },
@@ -32,6 +33,17 @@ const party = {
   // delete guest at position of the ID
   deleteGuest(guestID) {
     this.guests.splice(guestID, 1);
+    this.storeGuests();
+    ui.displayGuests();
+  },
+
+  // save guest data in local storage
+  storeGuests() {
+    localStorage.setItem("guests", JSON.stringify(this.guests));
+  },
+  // load guest data from local storage
+  loadGuests() {
+    this.guests = JSON.parse(localStorage.getItem("guests") || "[]");
     ui.displayGuests();
   }
 };
@@ -85,3 +97,4 @@ const ui = {
 
 // start event listeners on page load
 ui.setupEventListener();
+party.loadGuests();
