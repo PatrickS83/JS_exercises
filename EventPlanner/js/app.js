@@ -80,26 +80,32 @@ const ui = {
           </a>
         </td>
         `;
+      // add guest to table UI
       tableBody.appendChild(row);
     });
     // add or remove Delete All Button at the end of table
     this.displayDeleteAll();
   },
+
   // only display table if there are guests
   displayTable() {
     const tableContainer = document.querySelector("#tableContainer");
     party.guests.length ? (tableContainer.style.visibility = "visible") : (tableContainer.style.visibility = "hidden");
   },
+
   // checks if DeleteAllButton should be displayed
   displayDeleteAll() {
     const deleteAllBtn = document.querySelector(".deleteAll");
+    // add button if guest array bigger than zero and no deleteAllButton
     if (party.guests.length && !deleteAllBtn) {
       const tableContainer = document.querySelector("#tableContainer");
       tableContainer.appendChild(this.createDeleteButton());
+      // remove button if guest array zero and deleteAllButton exists
     } else if (!party.guests.length && deleteAllBtn) {
       deleteAllBtn.remove();
     }
   },
+
   // creates DeleteAll Button
   createDeleteButton() {
     const deleteButton = document.createElement("button");
