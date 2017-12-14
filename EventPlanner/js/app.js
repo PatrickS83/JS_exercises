@@ -110,9 +110,9 @@ const ui = {
       const elementClicked = e.target;
       if (elementClicked.id === "delete") {
         // getting the correct element to delete
-        const guestID = elementClicked.parentElement.parentElement.parentElement.id;
-        elementClicked.parentElement.parentElement.parentElement.classList.add("bounceOutRight");
-        setTimeout(() => party.deleteGuest(guestID), 800);
+        const guest = elementClicked.parentElement.parentElement.parentElement;
+        guest.classList.add("bounceOutRight");
+        setTimeout(() => party.deleteGuest(guest.id), 800);
       }
       e.preventDefault();
     });
