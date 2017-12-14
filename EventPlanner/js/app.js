@@ -8,6 +8,8 @@ const party = {
   guests: [],
 
   addGuest(event) {
+    // prevent page reload on submit
+    event.preventDefault();
     // Fetch all input values from form and put them into variables
     const inputs = document.querySelectorAll("input");
     [first, last, eMail, item, plusOne, plusOneName] = inputs;
@@ -20,13 +22,14 @@ const party = {
       plusOne: plusOneName.value
     };
     // check for required values
-    if (!!guest.firstName && !!guest.lastName && !!guest.bringItem) {
+    if (guest.firstName && guest.lastName && guest.bringItem) {
       // add guest to array if all required values are filled
       this.guests.push(guest);
       this.storeGuests();
       ui.displayGuests();
       //clear input fields
-      inputs.forEach(input => (input.value = ""));
+      // inputs.forEach(input => (input.value = ""));
+      window.location.reload();
     }
   },
 
@@ -122,6 +125,6 @@ const ui = {
   }
 };
 
-// start event listeners on page load
+// start event listeners and load local storage on page load
 ui.setupEventListener();
 party.loadGuests();
