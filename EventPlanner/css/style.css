@@ -1,4 +1,4 @@
-.col.s12 > .btn {
+.col.s12 > .btn, .deleteAll {
     width: 100%;
     /* margin-top: 10px */
  }

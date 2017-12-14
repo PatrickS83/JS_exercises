@@ -8,8 +8,6 @@ const party = {
   guests: [],
 
   addGuest(event) {
-    // stop refresh page on button submit
-    event.preventDefault();
     // Fetch all input values from form and put them into variables
     const inputs = document.querySelectorAll("input");
     [first, last, eMail, item, plusOne, plusOneName] = inputs;
@@ -27,12 +25,20 @@ const party = {
       this.guests.push(guest);
       this.storeGuests();
       ui.displayGuests();
+      //clear input fields
+      inputs.forEach(input => (input.value = ""));
     }
   },
 
   // delete guest at position of the ID
   deleteGuest(guestID) {
     this.guests.splice(guestID, 1);
+    this.storeGuests();
+    ui.displayGuests();
+  },
+  // delete all guests
+  deleteAll() {
+    this.guests = [];
     this.storeGuests();
     ui.displayGuests();
   },
@@ -71,6 +77,21 @@ const ui = {
         `;
       tableBody.appendChild(row);
     });
+    const deleteAllBtn = document.querySelector(".deleteAll");
+    if (party.guests.length && !deleteAllBtn) {
+      const tableContainer = document.querySelector("#tableContainer");
+      tableContainer.appendChild(this.createDeleteButton());
+    } else if (!party.guests.length && deleteAllBtn) {
+      deleteAllBtn.remove();
+    }
+  },
+  // creates DeleteAll Button
+  createDeleteButton() {
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "btn waves-effect waves-light deleteAll";
+    deleteButton.setAttribute("onclick", "party.deleteAll()");
+    deleteButton.textContent = "Delete All";
+    return deleteButton;
   },
 
   setupEventListener() {
