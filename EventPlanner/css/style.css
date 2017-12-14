@@ -10,3 +10,11 @@
  .btn-floating {
      font-size: 12px;
  }
+
+.plusOneDiv {
+    visibility: hidden;
+}
+
+ .active {
+     visibility: visible;
+ }

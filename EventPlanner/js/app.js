@@ -12,12 +12,13 @@ const party = {
     event.preventDefault();
     const inputs = document.querySelectorAll("input");
     [first, last, email, item, plusOne, plusOneName] = inputs;
+    console.log(plusOne.value);
     const guest = {
       firstName: first.value,
       lastName: last.value,
-      email: email.value,
+      email: (email.value = "-".repeat(10)),
       bringItem: item.value,
-      plusOne: plusOneName.value
+      plusOne: (plusOneName.value = "-".repeat(10))
     };
     if (!!guest.firstName && !!guest.lastName && !!guest.bringItem) {
       this.guests.push(guest);
@@ -62,6 +63,11 @@ const ui = {
         party.deleteGuest(guestID);
       }
       e.preventDefault();
+    });
+    const plusOne = document.querySelector("#bringOne");
+    plusOne.addEventListener("click", () => {
+      const plusOneName = document.querySelector(".plusOneDiv");
+      plusOneName.classList.toggle("active");
     });
   }
 };
