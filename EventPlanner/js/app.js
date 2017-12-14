@@ -55,7 +55,7 @@ const party = {
 };
 
 const ui = {
-  // renders the table with the guest from the guests array
+  // renders the table for each guest from the guests array
   displayGuests() {
     const tableBody = document.querySelector("tbody");
     // clear table
@@ -77,6 +77,12 @@ const ui = {
         `;
       tableBody.appendChild(row);
     });
+    // add or remove Delete All Button at the end of table
+    this.displayDeleteAll();
+  },
+
+  // checks if DeleteAllButton should be displayed
+  displayDeleteAll() {
     const deleteAllBtn = document.querySelector(".deleteAll");
     if (party.guests.length && !deleteAllBtn) {
       const tableContainer = document.querySelector("#tableContainer");
