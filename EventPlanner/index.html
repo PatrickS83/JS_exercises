@@ -42,15 +42,15 @@
                                 <input type="checkbox" id="bringOne"/>
                                 <label for="bringOne">Do you bring a plus-one?</label>
                                 <div class="input-field inline">
-                                    <input id="first_name" type="text" class="validate">
-                                    <label for="first_name">First Name</label>
+                                    <input id="plusOneName" type="text" class="validate">
+                                    <label for="plusOneName">First Name</label>
                                 </div>
                             </div>
 
                         </div>
                             <div class="row">
                             <div class="col s12">
-                                <button id ="joinEvent" class="btn waves-effect waves-light" >Join the event
+                                <button onclick="party.addGuest(event)" id ="joinEvent" class="btn waves-effect waves-light" >Join the event
                                 <!-- <i class="material-icons">send</i> -->
                                 </button>
                             </div>
