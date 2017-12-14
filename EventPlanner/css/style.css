@@ -6,3 +6,7 @@
  .card-panel {
      padding-bottom: 2px
  }
+
+ .btn-floating {
+     font-size: 12px;
+ }
