@@ -1,4 +1,4 @@
-const container = document.querySelector("container");
+const container = document.querySelector(".container");
 
 function fetchJokes(amount = 1) {
   fetch(`http://api.icndb.com/jokes/random/${amount}/`)
@@ -9,7 +9,10 @@ function fetchJokes(amount = 1) {
 
 function createList(jokes) {
   const ul = document.createElement("ul");
-  const li = document.createElement("li");
-  li.textContent = "";
-  ul.appendChild(li);
+  jokes.forEach(joke => {
+    const li = document.createElement("li");
+    li.textContent = joke.joke;
+    ul.appendChild(li);
+  });
+  container.appendChild(ul);
 }
