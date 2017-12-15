@@ -13,7 +13,7 @@ function displayList(jokes) {
   const ul = document.createElement("ul");
   jokes.forEach(joke => {
     const li = document.createElement("li");
-    li.textContent = joke.joke;
+    li.innerHTML = joke.joke;
     ul.appendChild(li);
   });
   container.appendChild(ul);
