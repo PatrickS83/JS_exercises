@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Fetch API Humor</title>
+</head>
+<body>
+    <section class="container">
+        <h1>Joke Fetcher</h1>
+        <form>
+            <div class="row">
+                <div class="seven columns">
+                    <label for="exampleRecipientInput">What type of joke do yo want to hear?</label>
+                    <select class="u-full-width" id="exampleRecipientInput">
+                        <option value="Option 1">Chuck Norris</option>
+                        <option value="Option 2">Misc</option>
+                        <option value="Option 3">Mother</option>
+                    </select>
+                </div>
+                <div class="five columns">
+                    <label for="amountJokes">How many jokes?</label>
+                    <input class="u-full-width" type="number" placeholder="How many jokes?" id="amountJokes">
+                </div>
+                <button type="button" class="twelve columns fetchBtn">Fetch joke</button>
+            </div>
+        </form>
+    </section>
+
+
+    <script src="app.js"></script>
+</body>
+</html>
