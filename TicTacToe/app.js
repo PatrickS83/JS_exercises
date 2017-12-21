@@ -102,16 +102,16 @@ function checkWin() {
 
 //returns true if game is tied
 function checkTie() {
-  let count = 9;
+  let count = 0;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
       if (board[i][j] === null) {
-        count--;
+        count++;
       }
     }
   }
   // game is tied if no null-spaces are left and nobody has won yets
-  return count === 9 ? true : false;
+  return count === 0 ? true : false;
 }
 
 //displays win/tie text on game end
