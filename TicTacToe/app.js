@@ -5,14 +5,15 @@ const winSpan = document.querySelector("#wintag");
 let player1;
 let win;
 let tie = false;
-// ID to cancel startParty interval
-let partyID;
+
 
 // handles the UI
 const ui = {
+  // ID to cancel startParty interval
+  partyID: 0,
   // random blinking colors in board spaces after winning
   startParty() {
-    partyID = setInterval(() => {
+    this.partyID = setInterval(() => {
       const boardSpace = document.querySelectorAll(".gamespace");
       boardSpace.forEach(space => {
         const x = Math.floor(Math.random() * 256);
@@ -69,7 +70,7 @@ function boardInit() {
     }
   }
   winSpan.classList.remove("winactive");
-  clearInterval(partyID);
+  clearInterval(ui.partyID);
   ui.drawBoard();
   ui.displayPlayer();
 }
