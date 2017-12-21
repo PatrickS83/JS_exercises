@@ -5,6 +5,7 @@ const winSpan = document.getElementById("wintag");
 let player1;
 let win;
 let tie = false;
+// ID to cancel startParty interval
 let partyID;
 
 // ---- Executon -------------
@@ -15,6 +16,7 @@ setupEventlistener();
 
 // ----- Functions ----------
 
+// initializes the game in starting state
 function boardInit() {
   player1 = true;
   win = false;
@@ -29,6 +31,7 @@ function boardInit() {
   displayPlayer();
 }
 
+// displays the board in browser
 function drawBoard() {
   boardGrid.innerHTML = "";
   for (let i = 0; i < board.length; i++) {
@@ -42,11 +45,13 @@ function drawBoard() {
   }
 }
 
+// displayes who is the current player
 function displayPlayer() {
   const playerTag = document.querySelector(".activePlayer");
   player1 ? (playerTag.textContent = "Turn: Player X") : (playerTag.textContent = "Turn: Player O");
 }
 
+// add event listeners to board
 function setupEventlistener() {
   boardGrid.addEventListener("click", event => {
     const spaceClicked = event.target;
@@ -72,6 +77,7 @@ function setupEventlistener() {
   });
 }
 
+// checks if either player has won and ends the game if true
 function checkWin() {
   //check rows for wins
   board.forEach(row => {
@@ -88,10 +94,10 @@ function checkWin() {
   const diaUp = board[0][2] + board[1][1] + board[2][0];
   if (diaDown === "XXX" || diaDown === "OOO") win = true;
   else if (diaUp === "XXX" || diaUp === "OOO") win = true;
-  //display win
-  if (win) displayGameEnd("win");
   //check tie
   if (checkTie()) displayGameEnd("tie");
+  //display win
+  if (win) displayGameEnd("win");
 }
 
 //returns true if game is tied
@@ -104,6 +110,7 @@ function checkTie() {
       }
     }
   }
+  // game is tied if no null-spaces are left and nobody has won yets
   return count === 9 ? true : false;
 }
 
@@ -119,6 +126,7 @@ function displayGameEnd(winTie) {
   }
 }
 
+// random blinking colors in board spaces after winning
 function startParty() {
   partyID = setInterval(() => {
     const boardSpace = document.querySelectorAll(".gamespace");
