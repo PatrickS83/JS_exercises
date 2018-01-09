@@ -40,9 +40,10 @@ const party = {
   },
 
   changeGuest(guestID, array) {
-    const [name, plusOneName, eMail, item] = array;
-    const [firstName, lastName] = name.innerText.split(' ');
     const guest = this.guests[guestID];
+    const [name, plusOneName, eMail, item] = array;
+    // split Full name from table into first name and last name
+    const [firstName, lastName] = name.innerText.split(' ');
     guest.firstName = firstName;
     guest.LastName = lastName;
     guest.plusOne = plusOneName.innerText;
