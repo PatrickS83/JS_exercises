@@ -28,11 +28,7 @@ const party = {
       this.storeGuests();
       ui.displayGuests();
       // clear input fields
-      // inputs.forEach((input) => {
-      //   const inputField = input;
-      //   inputField.value = '';
-      // });
-      window.location.reload();
+      window.location.reload(); // FIX ME
     }
   },
 
@@ -42,6 +38,20 @@ const party = {
     this.storeGuests();
     ui.displayGuests();
   },
+
+  changeGuest(guestID, array) {
+    const [name, plusOneName, eMail, item] = array;
+    const [firstName, lastName] = name.innerText.split(' ');
+    const guest = this.guests[guestID];
+    guest.firstName = firstName;
+    guest.LastName = lastName;
+    guest.plusOne = plusOneName.innerText;
+    guest.email = eMail.innerText;
+    guest.bringItem = item.innerText;
+    this.storeGuests();
+    ui.displayGuests();
+  },
+
   // delete all guests
   deleteAll() {
     this.guests = [];
@@ -130,19 +140,37 @@ const ui = {
     // event listener for delete and edit button
     table.addEventListener('click', (e) => {
       const elementClicked = e.target;
+      // assigning the guest to variable
+      const guest = elementClicked.parentElement.parentElement.parentElement;
       if (elementClicked.id === 'delete') {
-        // getting the correct element to delete
-        const guest = elementClicked.parentElement.parentElement.parentElement;
         guest.classList.add('bounceOutRight');
         setTimeout(() => party.deleteGuest(guest.id), 800);
       }
-      if (elementClicked.id === 'edit') {
+      if (elementClicked.id === 'edit' || elementClicked.id === 'done') {
         // getting the correct element to edit
         const tableRow = elementClicked.parentElement.parentElement.parentElement;
-        const tableRowFields = tableRow.querySelectorAll('td');
-        tableRowFields.forEach((field, index) => {
-          if (index !== tableRowFields.length - 1) field.setAttribute('contenteditable', '');
+        const tableRowFields = Array.from(tableRow.querySelectorAll('td'));
+        // remove edit/delete button from array
+        tableRowFields.pop();
+        // add or remove the contenteditable tag and visualize change
+        tableRowFields.forEach((field) => {
+          if (field.hasAttribute('contenteditable')) {
+            field.removeAttribute('contenteditable');
+            field.classList.toggle('editable');
+          } else {
+            field.setAttribute('contenteditable', '');
+            field.classList.toggle('editable');
+          }
         });
+        // toggle between edit / done button UI
+        if (elementClicked.id === 'edit') {
+          elementClicked.parentElement.innerHTML = '<i id=\'done\' class=\'small material-icons\'>done</i>';
+        } else {
+          elementClicked.parentElement.innerHTML = '<i id=\'edit\' class=\'small material-icons\'>edit</i>';
+          // save changes
+          const changedGuest = Array.from(tableRow.querySelectorAll('td'));
+          party.changeGuest(guest.id, changedGuest);
+        }
       }
       e.preventDefault();
     });

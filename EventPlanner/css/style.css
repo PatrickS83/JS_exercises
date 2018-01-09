@@ -47,3 +47,9 @@ table tbody tr:hover {
 .buttonsColumn {
     width: 125px;
 }
+
+.editable {
+    color: green;
+    font-weight: bold;
+}
+
