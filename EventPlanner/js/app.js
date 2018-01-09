@@ -28,7 +28,10 @@ const party = {
       this.storeGuests();
       ui.displayGuests();
       // clear input fields
-      // inputs.forEach(input => (input.value = '));
+      // inputs.forEach((input) => {
+      //   const inputField = input;
+      //   inputField.value = '';
+      // });
       window.location.reload();
     }
   },
@@ -75,8 +78,11 @@ const ui = {
         <td>${guest.email}</td>
         <td>${guest.bringItem}</td>
         <td>
+          <a class='btn-floating waves-effect waves-light teal'>
+            <i id='edit' class='small material-icons'>edit</i>
+          </a>
           <a class='btn-floating waves-effect waves-light red'>
-            <i id='delete' class='material-icons'>clear</i>
+            <i id='delete' class='small material-icons'>clear</i>
           </a>
         </td>
         `;
@@ -121,7 +127,7 @@ const ui = {
 
   setupEventListener() {
     const table = document.querySelector('table');
-    // event listener for delete button
+    // event listener for delete and edit button
     table.addEventListener('click', (e) => {
       const elementClicked = e.target;
       if (elementClicked.id === 'delete') {
@@ -129,6 +135,14 @@ const ui = {
         const guest = elementClicked.parentElement.parentElement.parentElement;
         guest.classList.add('bounceOutRight');
         setTimeout(() => party.deleteGuest(guest.id), 800);
+      }
+      if (elementClicked.id === 'edit') {
+        // getting the correct element to edit
+        const tableRow = elementClicked.parentElement.parentElement.parentElement;
+        const tableRowFields = tableRow.querySelectorAll('td');
+        tableRowFields.forEach((field, index) => {
+          if (index !== tableRowFields.length - 1) field.setAttribute('contenteditable', '');
+        });
       }
       e.preventDefault();
     });
