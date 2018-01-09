@@ -19,6 +19,7 @@ const party = {
       lastName: last.value,
       email: eMail.value,
       bringItem: item.value,
+      plusOneBool: plusOne,
       plusOne: plusOneName.value
     };
     // check for required values
