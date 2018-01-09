@@ -1,6 +1,6 @@
 // materialize init
-$(document).ready(function() {
-  $("select").material_select();
+$(document).ready(() => {
+  $('select').material_select();
 });
 
 // object for storing and handling the party data
@@ -11,8 +11,8 @@ const party = {
     // prevent page reload on submit
     event.preventDefault();
     // Fetch all input values from form and put them into variables
-    const inputs = document.querySelectorAll("input");
-    [first, last, eMail, item, plusOne, plusOneName] = inputs;
+    const inputs = document.querySelectorAll('input');
+    const [first, last, eMail, item, plusOne, plusOneName] = inputs;
     // create guest object
     const guest = {
       firstName: first.value,
@@ -27,8 +27,8 @@ const party = {
       this.guests.push(guest);
       this.storeGuests();
       ui.displayGuests();
-      //clear input fields
-      // inputs.forEach(input => (input.value = ""));
+      // clear input fields
+      // inputs.forEach(input => (input.value = '));
       window.location.reload();
     }
   },
@@ -48,11 +48,11 @@ const party = {
 
   // save guest data in local storage
   storeGuests() {
-    localStorage.setItem("guests", JSON.stringify(this.guests));
+    localStorage.setItem('guests', JSON.stringify(this.guests));
   },
   // load guest data from local storage
   loadGuests() {
-    this.guests = JSON.parse(localStorage.getItem("guests") || "[]");
+    this.guests = JSON.parse(localStorage.getItem('guests') || '[]');
     ui.displayGuests();
   }
 };
@@ -62,12 +62,12 @@ const ui = {
   displayGuests() {
     // only display table if there are guests
     this.displayTable();
-    const tableBody = document.querySelector("tbody");
+    const tableBody = document.querySelector('tbody');
     // clear table
-    tableBody.innerHTML = "";
+    tableBody.innerHTML = '';
     // add one row for each guest in the guests array
     party.guests.forEach((guest, index) => {
-      const row = document.createElement("tr");
+      const row = document.createElement('tr');
       row.id = index;
       row.innerHTML = `
         <td>${guest.firstName} ${guest.lastName}</td>
@@ -75,8 +75,8 @@ const ui = {
         <td>${guest.email}</td>
         <td>${guest.bringItem}</td>
         <td>
-          <a class="btn-floating waves-effect waves-light red">
-            <i id="delete" class="material-icons">clear</i>
+          <a class='btn-floating waves-effect waves-light red'>
+            <i id='delete' class='material-icons'>clear</i>
           </a>
         </td>
         `;
@@ -89,16 +89,20 @@ const ui = {
 
   // only display table if there are guests
   displayTable() {
-    const tableContainer = document.querySelector("#tableContainer");
-    party.guests.length ? (tableContainer.style.visibility = "visible") : (tableContainer.style.visibility = "hidden");
+    const tableContainer = document.querySelector('#tableContainer');
+    if (party.guests.length) {
+      tableContainer.style.visibility = 'visible';
+    } else {
+      tableContainer.style.visibility = 'hidden';
+    }
   },
 
   // checks if DeleteAllButton should be displayed
   displayDeleteAll() {
-    const deleteAllBtn = document.querySelector(".deleteAll");
+    const deleteAllBtn = document.querySelector('.deleteAll');
     // add button if guest array bigger than zero and no deleteAllButton
     if (party.guests.length && !deleteAllBtn) {
-      const tableContainer = document.querySelector("#tableContainer");
+      const tableContainer = document.querySelector('#tableContainer');
       tableContainer.appendChild(this.createDeleteButton());
       // remove button if guest array zero and deleteAllButton exists
     } else if (!party.guests.length && deleteAllBtn) {
@@ -108,32 +112,32 @@ const ui = {
 
   // creates DeleteAll Button
   createDeleteButton() {
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "btn waves-effect waves-light deleteAll";
-    deleteButton.setAttribute("onclick", "party.deleteAll()");
-    deleteButton.textContent = "Delete All";
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn waves-effect waves-light deleteAll';
+    deleteButton.setAttribute('onclick', 'party.deleteAll()');
+    deleteButton.textContent = 'Delete All';
     return deleteButton;
   },
 
   setupEventListener() {
-    const table = document.querySelector("table");
+    const table = document.querySelector('table');
     // event listener for delete button
-    table.addEventListener("click", e => {
+    table.addEventListener('click', (e) => {
       const elementClicked = e.target;
-      if (elementClicked.id === "delete") {
+      if (elementClicked.id === 'delete') {
         // getting the correct element to delete
         const guest = elementClicked.parentElement.parentElement.parentElement;
-        guest.classList.add("bounceOutRight");
+        guest.classList.add('bounceOutRight');
         setTimeout(() => party.deleteGuest(guest.id), 800);
       }
       e.preventDefault();
     });
     // event listener for plusOne button
-    const plusOne = document.querySelector("#bringOne");
-    plusOne.addEventListener("click", () => {
-      const plusOneName = document.querySelector(".plusOneDiv");
+    const plusOne = document.querySelector('#bringOne');
+    plusOne.addEventListener('click', () => {
+      const plusOneName = document.querySelector('.plusOneDiv');
       // show input field if button is checked
-      plusOneName.classList.toggle("active");
+      plusOneName.classList.toggle('active');
     });
   }
 };
