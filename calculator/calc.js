@@ -8,10 +8,9 @@ const calculator = {
   addValue(value) {
     calculator.values.push(value);
   },
-
   solveEquation() {
-    // convert array to string equation and remove "=" at the end
-    const joinedValues = this.values.join('').slice(0, -1);
+    // convert array to string equation
+    const joinedValues = this.values.join('');
     const result = eval(joinedValues);
     // display result in calculator display
     ui.displayResult(result);
@@ -42,7 +41,7 @@ function handleClick() {
   if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) && this.dataset.operator && calculator.values.length > 0) {
     console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
   } else {
-    calculator.addValue(this.dataset.value);
+    if (this.dataset.value !== '=') calculator.addValue(this.dataset.value);
     ui.displayResult(this.dataset.value, true);
     // on "=" press the equation is solved
     if (this.dataset.value === '=') calculator.solveEquation();
