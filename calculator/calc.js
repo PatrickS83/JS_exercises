@@ -40,7 +40,7 @@ function setupEventListeners() {
 
 // handles the clickevent on calculator buttons
 function handleClick() {
-  // only one operator is allowed between number
+  // only one operator is allowed between numbers
   if (Number.isNaN(Number(calculator.values[calculator.values.length - 1]))
       && this.dataset.operator
       && calculator.values.length > 0) {
