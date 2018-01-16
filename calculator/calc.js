@@ -41,7 +41,7 @@ function setupEventListeners() {
 // handles the clickevent on calculator buttons
 function handleClick() {
   // only one operator is allowed between numbers
-  if (Number.isNaN(Number(calculator.values[calculator.values.length - 1]))
+  if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) // FIXME: 5 * -2 should work, but doesn't
       && this.dataset.operator
       && calculator.values.length > 0) {
     console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
