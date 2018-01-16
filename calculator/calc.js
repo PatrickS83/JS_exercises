@@ -12,21 +12,22 @@ const calculator = {
   solveEquation() {
     // convert array to string equation and remove "=" at the end
     const joinedValues = this.values.join('').slice(0, -1);
-    // display result in calculator display
     const result = eval(joinedValues);
+    // display result in calculator display
     ui.displayResult(result);
     this.values = [result];
   },
+  // clear display and array
   resetCalc() {
     this.values = [];
     ui.displayResult('');
-  }
-
+  },
 };
 
 // ui object handles the user interface
 const ui = {
-  displayResult(result, concat) {
+  // if concat is true, numbers will be concatinated
+  displayResult(result = '', concat) {
     if (concat) calcDisplay.innerHTML += result;
     else calcDisplay.innerHTML = result;
   }
@@ -38,11 +39,15 @@ function setupEventListeners() {
 }
 
 function handleClick() {
-  calculator.addValue(this.dataset.value);
-  ui.displayResult(this.dataset.value, true);
-  // on "=" press the equation is solved
-  if (this.dataset.value === '=') calculator.solveEquation();
-  if (this.dataset.value === 'C') calculator.resetCalc();
+  if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) && this.dataset.operator && calculator.values.length > 0) {
+    console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
+  } else {
+    calculator.addValue(this.dataset.value);
+    ui.displayResult(this.dataset.value, true);
+    // on "=" press the equation is solved
+    if (this.dataset.value === '=') calculator.solveEquation();
+    if (this.dataset.value === 'C') calculator.resetCalc();
+  }
 }
 
 // ############ executed code ##############
