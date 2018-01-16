@@ -14,6 +14,7 @@ const calculator = {
     const result = eval(joinedValues);
     // display result in calculator display
     ui.displayResult(result);
+    // replace values in calculator array with the equation result
     this.values = [result];
   },
   // clear display and array
@@ -37,13 +38,17 @@ function setupEventListeners() {
   calcButtons.forEach(button => button.addEventListener('click', handleClick));
 }
 
+// handles the clickevent on calculator buttons
 function handleClick() {
-  if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) && this.dataset.operator && calculator.values.length > 0) {
+  // only one operator is allowed between number
+  if (Number.isNaN(Number(calculator.values[calculator.values.length - 1]))
+      && this.dataset.operator
+      && calculator.values.length > 0) {
     console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
   } else {
+    // push all values into array that are not the "=" character
     if (this.dataset.value !== '=') calculator.addValue(this.dataset.value);
     ui.displayResult(this.dataset.value, true);
-    // on "=" press the equation is solved
     if (this.dataset.value === '=') calculator.solveEquation();
     if (this.dataset.value === 'C') calculator.resetCalc();
   }
