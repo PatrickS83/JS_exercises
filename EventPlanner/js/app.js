@@ -176,6 +176,7 @@ const ui = {
       }
       e.preventDefault();
     });
+
     // event listener for plusOne button
     const plusOne = document.querySelector('#bringOne');
     plusOne.addEventListener('click', () => {
