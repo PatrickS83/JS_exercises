@@ -33,26 +33,30 @@ const ui = {
   }
 };
 
-// set up event listener for calculator buttons
-function setupEventListeners() {
-  calcButtons.forEach(button => button.addEventListener('click', handleClick));
-}
+// controller object handles events and buttons
+const controller = {
+  // set up event listener for calculator buttons
+  setupEventListeners() {
+    calcButtons.forEach(button => button.addEventListener('click', this.handleClick));
+  },
 
-// handles the clickevent on calculator buttons
-function handleClick() {
-  // only one operator is allowed between numbers
-  if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) // FIXME: 5 * -2 should work, but doesn't
+  // handles the clickevent on calculator buttons
+  handleClick() {
+    // only one operator is allowed between numbers
+    if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) // FIXME: 5 * -2 should work, but doesn't
       && this.dataset.operator
       && calculator.values.length > 0) {
-    console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
-  } else {
-    // push all values into array that are not the "=" character
-    if (this.dataset.value !== '=') calculator.addValue(this.dataset.value);
-    ui.displayResult(this.dataset.value, true);
-    if (this.dataset.value === '=') calculator.solveEquation();
-    if (this.dataset.value === 'C') calculator.resetCalc();
+      console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
+    } else {
+      // push all values into array that are not the "=" character
+      if (this.dataset.value !== '=') calculator.addValue(this.dataset.value);
+      ui.displayResult(this.dataset.value, true);
+      if (this.dataset.value === '=') calculator.solveEquation();
+      if (this.dataset.value === 'C') calculator.resetCalc();
+    }
   }
-}
+};
+
 
 // ############ executed code ##############
-setupEventListeners();
+controller.setupEventListeners();
