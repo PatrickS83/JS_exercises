@@ -7,8 +7,10 @@ h1 {
 }
 
 .calcContainer {
-    width: 180px;
+    width: 50%;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 .calculator {
@@ -45,4 +47,13 @@ h1 {
 .calculator .zero {
     width: auto;
     grid-column: 1 / 3;
+}
+
+.history {
+    font-size: 24px;
+    width: 150px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    text-align: center
 }

@@ -12,6 +12,7 @@ const calculator = {
     // convert array to string equation
     const joinedValues = this.values.join('');
     const result = eval(joinedValues);
+    ui.displayHistory(joinedValues, result);
     // display result in calculator display
     ui.displayResult(result);
     // replace values in calculator array with the equation result
@@ -30,6 +31,12 @@ const ui = {
   displayResult(result = '', concat) {
     if (concat) calcDisplay.innerHTML += result;
     else calcDisplay.innerHTML = result;
+  },
+  displayHistory(equation, result) {
+    const historyDiv = document.querySelector('.history');
+    const historySpan = document.createElement('span');
+    historySpan.innerHTML = `${equation} = ${result}`;
+    historyDiv.appendChild(historySpan);
   }
 };
 
@@ -46,7 +53,7 @@ const controller = {
     if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) // FIXME: 5 * -2 should work, but doesn't
       && this.dataset.operator
       && calculator.values.length > 0) {
-      console.log('ONLY ONE OPERATOR!!!!!!!!!!!');
+      console.log('Please enter only one operator at a time');
     } else {
       // push all values into array that are not the "=" character
       if (this.dataset.value !== '=') calculator.addValue(this.dataset.value);
@@ -56,7 +63,6 @@ const controller = {
     }
   }
 };
-
 
 // ############ executed code ##############
 controller.setupEventListeners();
