@@ -35,6 +35,10 @@ h1 {
     border: 1px solid black;
 }
 
+.calculator button:hover {
+    background-color: teal !important;
+}
+
 .calc_display {
     border: 1px solid black;
     width: 100%;
@@ -51,19 +55,29 @@ h1 {
 
 .history {
     font-size: 24px;
-    width: 150px;
+    width: 200px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     text-align: center;
+    background-color: lightgray;
 }
 
 
 .history span {
-    transition: all 0.3s
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 61px;
+    transition: all 0.3s;
+    border-top: 1px solid black;
+}
+
+.history span:last-of-type {
+    border-bottom: 1px solid black;
 }
 
 .history span:hover {
-    background-color: orange;
+    background-color: teal;
     cursor: pointer;
 }
