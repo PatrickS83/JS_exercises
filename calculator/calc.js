@@ -6,7 +6,7 @@ const calculator = {
   values: [],
   // add numbers or operators to values array
   addValue(value) {
-    calculator.values.push(value);
+    this.values.push(value);
   },
   solveEquation() {
     // convert array to string equation
@@ -23,6 +23,10 @@ const calculator = {
     this.values = [];
     ui.displayResult('');
   },
+  delLastVal() {
+    this.values.pop();
+    ui.displayResult(this.values.join(''));
+  }
 };
 
 // ui object handles the user interface
@@ -36,7 +40,7 @@ const ui = {
     const historyDiv = document.querySelector('.history');
     const historySpan = document.createElement('span');
     historySpan.innerHTML = `${equation} = ${result}`;
-    historyDiv.appendChild(historySpan);
+    historyDiv.insertBefore(historySpan, historyDiv.firstChild);
   }
 };
 
@@ -56,10 +60,11 @@ const controller = {
       console.log('Please enter only one operator at a time');
     } else {
       // push all values into array that are not the "=" character
-      if (this.dataset.value !== '=') calculator.addValue(this.dataset.value);
+      if (this.dataset.value !== '=' && this.dataset.value !== 'back') calculator.addValue(this.dataset.value);
       ui.displayResult(this.dataset.value, true);
       if (this.dataset.value === '=') calculator.solveEquation();
       if (this.dataset.value === 'C') calculator.resetCalc();
+      if (this.dataset.value === 'back') calculator.delLastVal();
     }
   }
 };
