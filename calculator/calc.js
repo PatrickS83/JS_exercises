@@ -38,6 +38,7 @@ const ui = {
     if (concat) calcDisplay.innerHTML += result;
     else calcDisplay.innerHTML = result;
   },
+  // displays past calcutalor equations next to calculator
   displayHistory(equation, result) {
     const historyDiv = document.querySelector('.history');
     const historySpan = document.createElement('span');
@@ -45,6 +46,7 @@ const ui = {
     else if (equation) historySpan.innerHTML = `${equation} = ${result}`;
     historyDiv.insertBefore(historySpan, historyDiv.firstChild);
   },
+  // deletes items from calculator history after doubleclick
   deleteHistoryItem(item) {
     item.remove();
   }
@@ -74,6 +76,7 @@ const controller = {
       if (this.dataset.value === 'back') calculator.delLastVal();
     }
   },
+  // event listener for calculator history
   handleHistoryClick(e) {
     const elementClicked = e.target;
     if (elementClicked.tagName === 'SPAN') ui.deleteHistoryItem(elementClicked);
