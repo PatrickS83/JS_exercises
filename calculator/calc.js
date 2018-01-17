@@ -1,5 +1,6 @@
-const calcButtons = document.querySelectorAll('[data-value');
+const calcButtons = document.querySelectorAll('[data-value]');
 const calcDisplay = document.querySelector('.calc_display');
+const calcHistory = document.querySelector('.history');
 
 // calculator object handles the logic
 const calculator = {
@@ -23,6 +24,7 @@ const calculator = {
     this.values = [];
     ui.displayResult('');
   },
+  // delete last value in array and display it
   delLastVal() {
     this.values.pop();
     ui.displayResult(this.values.join(''));
@@ -39,8 +41,12 @@ const ui = {
   displayHistory(equation, result) {
     const historyDiv = document.querySelector('.history');
     const historySpan = document.createElement('span');
-    historySpan.innerHTML = `${equation} = ${result}`;
+    if (calculator.values.length === 1) historySpan.innerHTML = `${equation}`;
+    else if (equation) historySpan.innerHTML = `${equation} = ${result}`;
     historyDiv.insertBefore(historySpan, historyDiv.firstChild);
+  },
+  deleteHistoryItem(item) {
+    item.remove();
   }
 };
 
@@ -48,11 +54,12 @@ const ui = {
 const controller = {
   // set up event listener for calculator buttons
   setupEventListeners() {
-    calcButtons.forEach(button => button.addEventListener('click', this.handleClick));
+    calcButtons.forEach(button => button.addEventListener('click', this.handleBtnClick));
+    calcHistory.addEventListener('dblclick', this.handleHistoryClick);
   },
 
   // handles the clickevent on calculator buttons
-  handleClick() {
+  handleBtnClick() {
     // only one operator is allowed between numbers
     if (Number.isNaN(Number(calculator.values[calculator.values.length - 1])) // FIXME: 5 * -2 should work, but doesn't
       && this.dataset.operator
@@ -66,6 +73,10 @@ const controller = {
       if (this.dataset.value === 'C') calculator.resetCalc();
       if (this.dataset.value === 'back') calculator.delLastVal();
     }
+  },
+  handleHistoryClick(e) {
+    const elementClicked = e.target;
+    if (elementClicked.tagName === 'SPAN') ui.deleteHistoryItem(elementClicked);
   }
 };
 

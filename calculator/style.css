@@ -55,5 +55,15 @@ h1 {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    text-align: center
+    text-align: center;
+}
+
+
+.history span {
+    transition: all 0.3s
+}
+
+.history span:hover {
+    background-color: orange;
+    cursor: pointer;
 }
