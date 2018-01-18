@@ -12,9 +12,13 @@ const jokeFetcher = {
 };
 
 const ui = {
-  // expects array of JSON objects to create and display joke list
+  // expects array of JSON objects to create and displays joke list
   displayList(jokes) {
+    // clear list if there is already a list
+    if (document.querySelector('ul')) document.querySelector('ul').remove();
+    // create list to display jokes
     const ul = document.createElement('ul');
+    // create a new list item for each joke and append to list
     jokes.forEach((joke) => {
       const li = document.createElement('li');
       li.innerHTML = joke.joke;
