@@ -31,7 +31,7 @@ const jokeFetcher = {
   fetchNumFact(number) {
     // fetch a random numberfact if user doesn't specify a number
     const numberFact = number || 'random?min=1&max=99';
-    fetch(`http://numbersapi.com/${numberFact}/`)
+    fetch(`http://numbersapi.com/${numberFact}`)
       .then(response => response.text())
       .then(data => ui.displayList([data]))
       .catch(err => console.log(`There was an error: ${err}`));
