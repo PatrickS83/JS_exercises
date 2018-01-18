@@ -23,6 +23,7 @@ const jokeFetcher = {
       .then(data => ui.displayList(data))
       .catch(err => console.log(`There was an error: ${err}`));
   },
+  // fetch fact about a number
   fetchNumFact(number = 1) {
     fetch(`http://numbersapi.com/${number}/`)
       .then(response => response.text())
