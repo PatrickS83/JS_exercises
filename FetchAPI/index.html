@@ -10,19 +10,19 @@
 </head>
 <body>
     <section class="container">
-        <h1>Joke Fetcher</h1>
+        <h1>API Fetcher</h1>
         <form>
             <div class="row">
                 <div class="seven columns">
-                    <label for="exampleRecipientInput">What type of joke do yo want to hear?</label>
-                    <select class="u-full-width" id="exampleRecipientInput">
-                        <option value="chuckN">Chuck Norris</option>
-                        <option value="ronSwan">Ron Swanson</option>
-                        <option value="Option 3">to be added</option>
+                    <label for="exampleRecipientInput">What type of jokes/trivia/facts do yo want to hear?</label>
+                    <select class="api_select u-full-width" id="exampleRecipientInput">
+                        <option value="chuckN">Chuck Norris Jokes</option>
+                        <option value="ronSwan">Ron Swanson Quotes</option>
+                        <option value="numFact">Number Facts</option>
                     </select>
                 </div>
                 <div class="five columns">
-                    <label for="amountJokes">How many jokes?</label>
+                    <label id="labelAmount" for="amountJokes">How many jokes?</label>
                     <input class="u-full-width" type="number" placeholder="How many jokes?" id="amountJokes" min="1">
                 </div>
                 <button type="button" class="twelve columns fetchBtn">Fetch joke</button>
