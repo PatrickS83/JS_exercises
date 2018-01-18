@@ -27,10 +27,10 @@ const ui = {
 const controller = {
   // setup Eventlistener
   setUpEventListeners() {
-    fetchBtn.addEventListener('click', this.handleClick);
+    fetchBtn.addEventListener('click', this.handleBtnClick);
   },
   // handle button click
-  handleClick() {
+  handleBtnClick() {
     const category = document.querySelector('select').value;
     const amountJokes = document.querySelector('#amountJokes').value;
     if (category === 'chuckN') jokeFetcher.fetchChuckJokes(amountJokes);
