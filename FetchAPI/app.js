@@ -6,8 +6,10 @@ const inputAmount = document.querySelector('#amountJokes');
 
 const jokeFetcher = {
   // fetch chuck norris jokes
-  fetchChuckJokes(amount = 1) {
-    fetch(`http://api.icndb.com/jokes/random/${amount}/`)
+  fetchChuckJokes(amount) {
+    // fetch one joke if user doesn't specify an amount
+    const numJokes = amount || 1;
+    fetch(`http://api.icndb.com/jokes/random/${numJokes}/`)
       .then(response => response.json())
       .then((data) => {
         // convert array of json objects to array of jokes as strings
@@ -17,15 +19,19 @@ const jokeFetcher = {
       .catch(err => console.log(`There was an error: ${err}`));
   },
   // fetch ron swanson quotes
-  fetchRonQuotes(amount = 1) {
-    fetch(`http://ron-swanson-quotes.herokuapp.com/v2/quotes/${amount}/`)
+  fetchRonQuotes(amount) {
+    // fetch one quote if user doesn't specify an amount
+    const numQuotes = amount || 1;
+    fetch(`http://ron-swanson-quotes.herokuapp.com/v2/quotes/${numQuotes}/`)
       .then(response => response.json())
       .then(data => ui.displayList(data))
       .catch(err => console.log(`There was an error: ${err}`));
   },
   // fetch fact about a number
-  fetchNumFact(number = 1) {
-    fetch(`http://numbersapi.com/${number}/`)
+  fetchNumFact(number) {
+    // fetch a random numberfact if user doesn't specify a number
+    const numberFact = number || 'random?min=1&max=99';
+    fetch(`http://numbersapi.com/${numberFact}/`)
       .then(response => response.text())
       .then(data => ui.displayList([data]))
       .catch(err => console.log(`There was an error: ${err}`));
@@ -77,10 +83,9 @@ const controller = {
   // handle button click
   handleBtnClick() {
     const category = document.querySelector('select').value;
-    const amountJokes = document.querySelector('#amountJokes').value;
-    if (category === 'chuckN') jokeFetcher.fetchChuckJokes(amountJokes);
-    if (category === 'ronSwan') jokeFetcher.fetchRonQuotes(amountJokes);
-    if (category === 'numFact') jokeFetcher.fetchNumFact(amountJokes);
+    if (category === 'chuckN') jokeFetcher.fetchChuckJokes(inputAmount.value);
+    if (category === 'ronSwan') jokeFetcher.fetchRonQuotes(inputAmount.value);
+    if (category === 'numFact') jokeFetcher.fetchNumFact(inputAmount.value);
   },
   // handle clicks on the API selector
   handleSelectClick(e) {
