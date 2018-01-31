@@ -70,14 +70,14 @@ class Controller {
   // receives event of clicked Item and store information as an object
   static handleItemClick(clickedItem) {
     const quantity = clickedItem.target.parentElement.previousSibling.value;
-    const elementClicked = clickedItem.target.parentElement.parentElement;
-    if (elementClicked.nodeName === 'LI') {
+    const itemToAdd = clickedItem.target.parentElement.parentElement;
+    if (itemToAdd.nodeName === 'LI') {
       const item = {
-        name: elementClicked.innerText,
-        price: elementClicked.dataset.price,
+        name: itemToAdd.innerText,
+        price: itemToAdd.dataset.price,
         quantity,
-        shippingCost: elementClicked.dataset.shippingCosts,
-        deliveryTime: elementClicked.dataset.deliveryTime
+        shippingCost: itemToAdd.dataset.shippingCosts,
+        deliveryTime: itemToAdd.dataset.deliveryTime
       };
       shoppingCart.addItem(item);
     }
