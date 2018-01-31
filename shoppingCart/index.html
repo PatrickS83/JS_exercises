@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Shopping Cart Classes</title>
+</head>
+<body>
+    <h1>Shopping</h1>
+    <ul class="food_list list-group">
+            <li class="list-group-item" data-price="19.99" data-shipping-costs="3.99" data-delivery-time="3">Pants</li>
+            <li class="list-group-item" data-price="9.99" data-shipping-costs="4.99" data-delivery-time="6">Catnip</li>
+            <li class="list-group-item" data-price="734.99" data-shipping-costs="1.99" data-delivery-time="5">Dragon Food</li>
+            <li class="list-group-item" data-price="0.99" data-shipping-costs="1.64" data-delivery-time="2">Useless stuff</li>
+            <li class="list-group-item" data-price="20.00" data-shipping-costs="0" data-delivery-time="0">E-book</li>
+          </ul>
+
+    <div>
+        <h3>Your Cart</h3>
+        <ul id="cart_overview">
+        </ul>
+        <div>
+            Items in cart:
+            <span id="item_count"></span>
+            <br>
+            Total price:
+            <span id="price_total"></span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
