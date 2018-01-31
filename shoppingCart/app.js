@@ -69,12 +69,13 @@ class Controller {
 
   // receives event of clicked Item and store information as an object
   static handleItemClick(clickedItem) {
-    const elementClicked = clickedItem.target;
+    const quantity = clickedItem.target.parentElement.previousSibling.value;
+    const elementClicked = clickedItem.target.parentElement.parentElement;
     if (elementClicked.nodeName === 'LI') {
       const item = {
-        name: elementClicked.innerHTML,
+        name: elementClicked.innerText,
         price: elementClicked.dataset.price,
-        quantity: 1,
+        quantity,
         shippingCost: elementClicked.dataset.shippingCosts,
         deliveryTime: elementClicked.dataset.deliveryTime
       };

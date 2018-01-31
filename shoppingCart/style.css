@@ -1,3 +1,9 @@
 .food_list li {
     cursor: pointer;
+    display: flex;
+    justify-content: space-between
+}
+
+.food_list input {
+    width: 40px;
 }
