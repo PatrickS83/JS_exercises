@@ -4,22 +4,6 @@ const foodList = document.querySelector('.food_list');
 class ShoppingCart {
   constructor() {
     this.items = [];
-    this.setupEventlistener();
-  }
-
-  setupEventlistener() {
-    foodList.addEventListener('click', (e) => {
-      const elementClicked = e.target;
-      if (elementClicked.nodeName === 'LI') {
-        const item = {
-          name: elementClicked.innerHTML,
-          price: elementClicked.dataset.price,
-          shippingCost: elementClicked.dataset.shippingCosts,
-          deliveryTime: elementClicked.dataset.deliveryTime
-        };
-        this.addItem(item);
-      }
-    });
   }
 
   addItem(foodItem) {
@@ -45,13 +29,14 @@ class UI {
     };
   }
 
+  displayCost(totalCost) {
+    this.elements.priceTotal.innerHTML = totalCost.toFixed(2);
+  }
+
   displayItemCount(cartContent = []) {
     this.elements.itemCount.innerHTML = cartContent.length;
   }
 
-  displayCost(totalCost) {
-    this.elements.priceTotal.innerHTML = totalCost.toFixed(2);
-  }
 
   displayCartContent(cartContent = []) {
     const cartList = this.elements.cartOverview;
@@ -64,5 +49,31 @@ class UI {
   }
 }
 
+class Controller {
+  constructor() {
+    Controller.setupEventlistener();
+  }
+
+  static setupEventlistener() {
+    foodList.addEventListener('click', (e) => {
+      const elementClicked = e.target;
+      if (elementClicked.nodeName === 'LI') {
+        const item = {
+          name: elementClicked.innerHTML,
+          price: elementClicked.dataset.price,
+          shippingCost: elementClicked.dataset.shippingCosts,
+          deliveryTime: elementClicked.dataset.deliveryTime
+        };
+        shoppingCart.addItem(item);
+      }
+    });
+  }
+
+  // handleItemClick(){
+
+  // }
+}
+
 const ui = new UI();
 const shoppingCart = new ShoppingCart();
+const controller = new Controller();
