@@ -1,6 +1,3 @@
-const foodList = document.querySelector('.food_list');
-
-
 class ShoppingCart {
   constructor() {
     // the shopping cart array expects objects
@@ -11,6 +8,15 @@ class ShoppingCart {
   addItem(foodItem = {}) {
     const shoppingCartContent = this.items;
     shoppingCartContent.push(foodItem);
+    this.calculatePriceTotal();
+    ui.displayItemCount(shoppingCartContent);
+    ui.displayCartContent(shoppingCartContent);
+  }
+
+  // delete item from shoppingcart
+  deleteItem(itemID) {
+    const shoppingCartContent = this.items;
+    shoppingCartContent.splice(itemID, 1);
     this.calculatePriceTotal();
     ui.displayItemCount(shoppingCartContent);
     ui.displayCartContent(shoppingCartContent);
@@ -48,9 +54,10 @@ class UI {
   displayCartContent(cartContent = []) {
     const cartList = this.elements.cartOverview;
     cartList.innerHTML = '';
-    cartContent.forEach((item) => {
+    cartContent.forEach((item, index) => {
       const li = document.createElement('li');
-      li.innerHTML = `${item.name} x${item.quantity}`;
+      li.innerHTML = `${item.name} x${item.quantity}  <i class="fa fa-trash-o" aria-hidden="true"></i>`;
+      li.id = index;
       cartList.appendChild(li);
     });
   }
@@ -63,13 +70,17 @@ class Controller {
   }
 
   static setupEventlistener() {
+    const foodList = document.querySelector('.food_list');
+    const cartOverview = document.querySelector('.cart_overview');
     // listens to clicks on items in the shop
     foodList.addEventListener('click', this.handleItemClick);
+    // listens to clicks in shopping cart list
+    cartOverview.addEventListener('click', this.handleShoppingCartClick);
   }
 
   // receives event of clicked Item and store information as an object
   static handleItemClick(clickedItem) {
-    const quantity = clickedItem.target.parentElement.previousSibling.value;
+    const quantity = clickedItem.target.parentElement.previousSibling.value || 1;
     const itemToAdd = clickedItem.target.parentElement.parentElement;
     if (itemToAdd.nodeName === 'LI') {
       const item = {
@@ -82,9 +93,18 @@ class Controller {
       shoppingCart.addItem(item);
     }
   }
+
+  // receives event of clicked item in shopping cart
+  static handleShoppingCartClick(clickedItem) {
+    const elementClicked = clickedItem.target;
+    if (elementClicked.nodeName === 'I') {
+      shoppingCart.deleteItem(elementClicked.parentElement.id);
+    }
+  }
 }
 
 // initialization
 const ui = new UI();
 const shoppingCart = new ShoppingCart();
 const controller = new Controller();
+

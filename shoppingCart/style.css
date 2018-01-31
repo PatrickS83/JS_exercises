@@ -16,3 +16,12 @@
     width: 30%;
     margin: 0 auto;
 }
+
+.cart_overview li{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart_overview i {
+    cursor: pointer;
+}
