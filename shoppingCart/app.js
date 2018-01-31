@@ -30,7 +30,7 @@ class UI {
     this.elements = {
       itemCount: document.querySelector('#item_count'),
       priceTotal: document.querySelector('#price_total'),
-      cartOverview: document.querySelector('#cart_overview'),
+      cartOverview: document.querySelector('.cart_overview'),
     };
   }
 
@@ -64,7 +64,7 @@ class Controller {
 
   static setupEventlistener() {
     // listens to clicks on items in the shop
-    foodList.addEventListener('click', Controller.handleItemClick);
+    foodList.addEventListener('click', this.handleItemClick);
   }
 
   // receives event of clicked Item and store information as an object
@@ -74,6 +74,7 @@ class Controller {
       const item = {
         name: elementClicked.innerHTML,
         price: elementClicked.dataset.price,
+        quantity: 1,
         shippingCost: elementClicked.dataset.shippingCosts,
         deliveryTime: elementClicked.dataset.deliveryTime
       };
@@ -82,6 +83,7 @@ class Controller {
   }
 }
 
+// initialization
 const ui = new UI();
 const shoppingCart = new ShoppingCart();
 const controller = new Controller();
