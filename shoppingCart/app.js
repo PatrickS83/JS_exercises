@@ -55,23 +55,21 @@ class Controller {
   }
 
   static setupEventlistener() {
-    foodList.addEventListener('click', (e) => {
-      const elementClicked = e.target;
-      if (elementClicked.nodeName === 'LI') {
-        const item = {
-          name: elementClicked.innerHTML,
-          price: elementClicked.dataset.price,
-          shippingCost: elementClicked.dataset.shippingCosts,
-          deliveryTime: elementClicked.dataset.deliveryTime
-        };
-        shoppingCart.addItem(item);
-      }
-    });
+    foodList.addEventListener('click', Controller.handleItemClick);
   }
 
-  // handleItemClick(){
-
-  // }
+  static handleItemClick(clickedItem) {
+    const elementClicked = clickedItem.target;
+    if (elementClicked.nodeName === 'LI') {
+      const item = {
+        name: elementClicked.innerHTML,
+        price: elementClicked.dataset.price,
+        shippingCost: elementClicked.dataset.shippingCosts,
+        deliveryTime: elementClicked.dataset.deliveryTime
+      };
+      shoppingCart.addItem(item);
+    }
+  }
 }
 
 const ui = new UI();
