@@ -3,10 +3,12 @@ const foodList = document.querySelector('.food_list');
 
 class ShoppingCart {
   constructor() {
+    // the shopping cart array expects objects
     this.items = [];
   }
 
-  addItem(foodItem) {
+  // add clicked item to shoppingcart
+  addItem(foodItem = {}) {
     const shoppingCartContent = this.items;
     shoppingCartContent.push(foodItem);
     this.calculatePriceTotal();
@@ -14,12 +16,15 @@ class ShoppingCart {
     ui.displayCartContent(shoppingCartContent);
   }
 
+  // calculates total price of all items in cart without shipping cost
   calculatePriceTotal() {
     const totalCost = this.items.reduce((total, item) => total + Number(item.price), 0);
     ui.displayCost(totalCost);
   }
 }
 
+
+// UI class handles the browser display
 class UI {
   constructor() {
     this.elements = {
@@ -29,15 +34,17 @@ class UI {
     };
   }
 
+  // displays total cost of all items in shopping cart
   displayCost(totalCost) {
     this.elements.priceTotal.innerHTML = totalCost.toFixed(2);
   }
 
+  // displays the number of items in shopping cart
   displayItemCount(cartContent = []) {
     this.elements.itemCount.innerHTML = cartContent.length;
   }
 
-
+  // displays the names of all items in the shopping cart in a list
   displayCartContent(cartContent = []) {
     const cartList = this.elements.cartOverview;
     cartList.innerHTML = '';
@@ -49,15 +56,18 @@ class UI {
   }
 }
 
+// handles events and clicks in browser
 class Controller {
   constructor() {
     Controller.setupEventlistener();
   }
 
   static setupEventlistener() {
+    // listens to clicks on items in the shop
     foodList.addEventListener('click', Controller.handleItemClick);
   }
 
+  // receives event of clicked Item and store information as an object
   static handleItemClick(clickedItem) {
     const elementClicked = clickedItem.target;
     if (elementClicked.nodeName === 'LI') {
