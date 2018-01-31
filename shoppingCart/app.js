@@ -75,7 +75,7 @@ class Controller {
     // listens to clicks on items in the shop
     foodList.addEventListener('click', this.handleItemClick);
     // listens to clicks in shopping cart list
-    cartOverview.addEventListener('click', this.handleShoppingCartClick);
+    cartOverview.addEventListener('click', this.handleShoppingCartDelete);
   }
 
   // receives event of clicked Item and store information as an object
@@ -95,7 +95,7 @@ class Controller {
   }
 
   // receives event of clicked item in shopping cart
-  static handleShoppingCartClick(clickedItem) {
+  static handleShoppingCartDelete(clickedItem) {
     const elementClicked = clickedItem.target;
     if (elementClicked.nodeName === 'I') {
       shoppingCart.deleteItem(elementClicked.parentElement.id);
