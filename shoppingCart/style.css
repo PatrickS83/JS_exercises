@@ -1,9 +1,18 @@
 .food_list li {
-    cursor: pointer;
     display: flex;
-    justify-content: space-between
+    justify-content: flex-end;
 }
 
 .food_list input {
     width: 40px;
+    margin-left: 20px;
+}
+
+.food_list i {
+    cursor: pointer;
+}
+
+.food_list{
+    width: 30%;
+    margin: 0 auto;
 }

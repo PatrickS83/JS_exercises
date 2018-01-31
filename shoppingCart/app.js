@@ -18,7 +18,7 @@ class ShoppingCart {
 
   // calculates total price of all items in cart without shipping cost
   calculatePriceTotal() {
-    const totalCost = this.items.reduce((total, item) => total + Number(item.price), 0);
+    const totalCost = this.items.reduce((total, item) => total + Number(item.price * item.quantity), 0);
     ui.displayCost(totalCost);
   }
 }
@@ -50,7 +50,7 @@ class UI {
     cartList.innerHTML = '';
     cartContent.forEach((item) => {
       const li = document.createElement('li');
-      li.innerHTML = item.name;
+      li.innerHTML = `${item.name} x${item.quantity}`;
       cartList.appendChild(li);
     });
   }
